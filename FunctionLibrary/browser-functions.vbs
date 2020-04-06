@@ -16,7 +16,8 @@
 'an domain-specific-abstract functions. Remember to change the values if you reuse this library.
 
 Function LoginBrowser(strUserName, strPassword)
-    ' Get Login page object
+    
+	' Get Login page object
     Dim objPageLogin: Set objPageLogin = GetPageObject("Login", "Login")
 
     'Input User name
@@ -30,21 +31,58 @@ Function LoginBrowser(strUserName, strPassword)
     'Click login button
     Dim objWebButtonLogin: Set objWebButtonLogin = GetWebButton (objPageLogin, "Login" )
     Call ClickWebButton (objWebButtonLogin)
+	
 End Function
 
 'Note: Same like login, the below values are fixed for AUT. It could be different for your application but once 
 'set, you dont need to parameterise these. Unless your application in different environment has differnt values for these
 'in which case it would make perfect sense to parameterise this. 
-Function LogoutBrowser()
-    ' Get Home page object
+Function LogoutBrowser() 
+ 
+	' Get Home page object
     Dim objPageHome: Set objPageHome = GetPageObject("Home", "Home")
     
     ' Click logout button
     Dim objLogoutImage: Set objLogoutImage = GetImage(objPageHome, "Logout", "//TABLE[@id='globalHeaderID']/TBODY[1]/TR[1]/TD[13]/A[1]/DIV[1]/IMG[1]")
     Call ClickWebButton (objLogoutImage)
+	
 End Function
 
-Function LoginTestEnvironment(pathConfigXML, testEnv)
+Function LoginTestEnvironment(objXMLTestEnv)
+
+	'Launch browser and navigate to url of your choice
+	Dim strBrowserName: strBrowserName = GetXMLChildNodeValue(objXMLTestEnv, "BrowserName")
+	Dim strBrowserURL: strBrowserURL = GetXMLChildNodeValue(objXMLTestEnv, "BrowserURL")
+	Call LaunchBrowserAndGoToURL(strBrowserName, strBrowserURL)
+
+	'Ensure that page now exists and is fully synced
+	' Get Login page object and sync
+	Dim objPageLogin: Set objPageLogin = GetPageObject("Login", "Login")
+	Call SyncPage(objPageLogin)
+
+	'Login to the test application
+	Dim strUserName: strUserName = GetXMLChildNodeValue(objXMLTestEnv, "UserName")
+	Dim strPassword: strPassword = GetXMLChildNodeValue(objXMLTestEnv, "EncodedPassword")
+	Call LoginBrowser(strUserName, strPassword)
+
+	'SyncPage objPageHome
+	' Get Home page object and sync
+	Dim objPageHome: Set objPageHome = GetPageObject("Home", "Home")
+	Call SyncPage(objPageHome)
+	
+End Function
+
+Function CloseTestBrowsers(objXMLTestEnv)
+
+	'Close all open browser instances of this browser type (say "IE") for test robustness
+	Dim strBrowserName: strBrowserName = GetXMLChildNodeValue(objXMLTestEnv, "BrowserName")
+	Dim browsersEXEFileName: browsersEXEFileName = GetBrowsersEXEName(strBrowserName)
+	Call CloseAllBrowserInstances(browsersEXEFileName)	
+	
+End Function
+
+Function LoginTestEnvironment2(pathConfigXML, testEnv)
+
 	'Get the browser type to navigate to from this config.xml file 
 	Dim objXMLTestEnv: Set objXMLTestEnv = GetTestEnvConfigurationObject(pathConfigXML, testEnv)
 
@@ -71,4 +109,5 @@ Function LoginTestEnvironment(pathConfigXML, testEnv)
 	' Get Home page object and sync
 	Dim objPageHome: Set objPageHome = GetPageObject("Home", "Home")
 	Call SyncPage(objPageHome)
+	
 End Function
