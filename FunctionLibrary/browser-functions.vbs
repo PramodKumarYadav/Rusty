@@ -55,7 +55,7 @@ Function LoginTestEnvironment(pathConfigXML, testEnv)
 
 	'Launch browser and navigate to url of your choice
 	Dim strBrowserURL: strBrowserURL = GetXMLChildNodeValue(objXMLTestEnv, "BrowserURL")
-	LaunchBrowserAndGoToURL strBrowserName, strBrowserURL 
+	Call LaunchBrowserAndGoToURL(strBrowserName, strBrowserURL)
 
 	'Ensure that page now exists and is fully synced
 	' Get Login page object and sync
