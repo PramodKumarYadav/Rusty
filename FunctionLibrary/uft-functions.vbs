@@ -1,5 +1,5 @@
 'To avoid errors due to typos in variable names
-Option Explicit
+'Option Explicit
  
 Function LoadAllFunctionLibraries(pathFnLibraryDir)
 	
@@ -20,6 +20,12 @@ Function LoadAllFunctionLibraries(pathFnLibraryDir)
 	Next
 
 	Call ShowSubfolders(objRootFolder)
+	
+	msgbox "All libraries loaded" 
+	
+	'Now release the objects memory
+	Set objFSO = Nothing
+	Set objFiles = Nothing
 	
 End Function
 
@@ -45,6 +51,10 @@ Sub ShowSubFolders(objRootFolder)
         Call ShowSubFolders(objSubfolder)	
     Next
 
+	'Now release the objects memory
+	Set objChildFolder = Nothing
+	Set objFiles = Nothing
+	
 End Sub
 
 Function GetParameterValueFromGlobalDataSheet(strParameterName)

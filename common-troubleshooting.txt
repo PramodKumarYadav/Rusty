@@ -9,6 +9,9 @@ Common Troubleshooting errors and their root cause while working with UFT:
   
 - Changing parameters in functions call or in functions defination but not setting it in other place.
 
+- If you rename a function and call it in UFT, it will not tell that the function is missing. Instead, it will say
+  "Type mismatch: 'GetBrowsersEXENameDummy'". Thats an incorrect message for a missing function. Puts on off in wrong direction and wastes time.Rusty!
+  
 - While calling a object, call using set. While calling a string function, call without Set. 
 	Dim objXML1: Set objXML1 = GetTestEnvConfigurationValue(pathXML, testEnv, Key)
 	Dim BrowserName: BrowserName = GetXMLChildNodeValue(objXML1, Key)
