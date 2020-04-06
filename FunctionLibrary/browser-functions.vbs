@@ -1,19 +1,6 @@
  'To avoid errors due to typos in variable names
  Option Explicit
 
- 'Note: The page object changes with every action done on it. 
- 'Remember to always fetch the latest object instance before doing an action on it. (as you see in example in LoginBrowser)
- 
-'All below functions, although still abstract, contains application/domain specific 'fixed' values.
-
-'For example, in LoginPage function, the 'name' properties (say "usernameField") are specific to 
-'application under test. If you are using it in your application, these values will change 
-'to your applications webedit and webbutton property names.
-
-'However for all practical purposes, for your given environment once you set these values, these
-'values will not change say per different test environments. So you can safely use these as
-'an domain-specific-abstract functions. Remember to change the values if you reuse this library.
-
  ' Get browsersEXEName for a browser type
 Function GetBrowsersEXEName(strBrowserType)	
     Dim exeFileName	
@@ -50,6 +37,20 @@ End Function
     'Launch URL from chosen browser
     SystemUtil.Run exeFileName,strURLAddress
 End Function
+
+ 'Note: The page object changes with every action done on it. 
+ 'Remember to always fetch the latest object instance before doing an action on it. (as you see in example in LoginBrowser)
+ 
+'All below functions, although still abstract, contains application/domain specific 'fixed' values. You should adjust them as per your application under test
+'for them to work for your AUT.
+
+'For example, in LoginPage function, the 'name' properties (say "usernameField") are specific to 
+'application under test. If you are using it in your application, these values will change 
+'to your applications webedit and webbutton property names.
+
+'However for all practical purposes, for your given environment once you set these values, these
+'values will not change say per different test environments. So you can safely use these as
+'an domain-specific-abstract functions. Remember to change the values if you reuse this library.
 
 Function LoginBrowser(strUserName, strPassword)
     ' Get Login page object
