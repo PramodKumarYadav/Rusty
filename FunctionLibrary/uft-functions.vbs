@@ -1,5 +1,5 @@
 'To avoid errors due to typos in variable names
-'Option Explicit (Removing this since it is also asking for )
+Option Explicit
  
 Function LoadAllFunctionLibraries(pathFnLibraryDir)
 	
@@ -9,7 +9,8 @@ Function LoadAllFunctionLibraries(pathFnLibraryDir)
 	Dim objRootFolder: Set objRootFolder = objFSO.GetFolder(pathFnLibraryDir)
 
 	Dim objFiles: Set objFiles = objRootFolder.Files
-	For Each Dim objFile in objFiles
+	Dim objFile
+	For Each objFile in objFiles
 		msgbox objFile.Name 
 		'If file is of type vbs, then load this file.
 		If LCase(objFSO.GetExtensionName(objFile.Name)) = "vbs" Then
@@ -29,6 +30,7 @@ Sub ShowSubFolders(objRootFolder)
 		Dim objChildFolder: Set objChildFolder = objFSO.GetFolder(objSubfolder.Path)
         
 		Dim objFiles: Set objFiles = objChildFolder.Files 
+		Dim objFile
 		For Each objFile in objFiles
 			msgbox objFile.Name 
             'If file is of type vbs, then load this file.
