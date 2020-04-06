@@ -47,13 +47,17 @@ Sub ShowSubFolders(objRootFolder)
 
 End Sub
 
-Function GetParameterValueFromDataSheet(strParameterName, strSheetType)
+Function GetParameterValueFromGlobalDataSheet(strParameterName)
 	
-	'Return the value of parameter based on global or local
-	If strSheetType = "Local" Then		
-		GetParameterValueFromDataSheet = DataTable.Value(strParameterName, dtLocalSheet)
-	Else
-		GetParameterValueFromDataSheet = DataTable(strParameterName)  
-	End If	
+	'Return the value of parameter from global sheet
+	GetParameterValueFromGlobalDataSheet = DataTable(strParameterName)  
+	
+End Function
+
+'Todo: Check if this works (to be tested) and how to give local sheet name in parameter
+Function GetParameterValueFromLocalDataSheet(strParameterName)
+	
+	'Return the value of parameter from local sheet
+	GetParameterValueFromLocalDataSheet = DataTable.Value(strParameterName, dtLocalSheet)
 	
 End Function
