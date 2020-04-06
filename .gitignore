@@ -1,0 +1,23 @@
+# Ignore all run time files that are not so important to store.
+*.mtr
+*.bdb
+*.html
+*.xml
+*.js
+*.ini
+*.xls
+*.css
+*.tsp
+*.usr
+*.lck
+*.usp
+*.cfg
+
+# Ignore all lock files
+*.lck
+
+# But not these files...
+!*.mts
+
+# Ignore all solutions (only interested in function libraries to be version controlled)
+/*.ftsln
