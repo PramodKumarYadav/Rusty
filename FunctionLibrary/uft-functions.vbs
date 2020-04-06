@@ -11,7 +11,7 @@ Function LoadAllFunctionLibraries(pathFnLibraryDir)
 	Dim objFiles: Set objFiles = objRootFolder.Files
 	Dim objFile
 	For Each objFile in objFiles
-		msgbox objFile.Name 
+		'msgbox objFile.Name 
 		'If file is of type vbs, then load this file.
 		If LCase(objFSO.GetExtensionName(objFile.Name)) = "vbs" Then
             'Associate the function library
@@ -24,15 +24,17 @@ Function LoadAllFunctionLibraries(pathFnLibraryDir)
 End Function
 
 Sub ShowSubFolders(objRootFolder)
-
+	
+	Dim objSubfolder
     For Each objSubfolder in objRootFolder.SubFolders
         
 		Dim objChildFolder: Set objChildFolder = objFSO.GetFolder(objSubfolder.Path)
         
 		Dim objFiles: Set objFiles = objChildFolder.Files 
+		
 		Dim objFile
 		For Each objFile in objFiles
-			msgbox objFile.Name 
+			'msgbox objFile.Name 
             'If file is of type vbs, then load this file.
 			If LCase(objFSO.GetExtensionName(objFile.Name)) = "vbs" Then
 				'Associate the function library
