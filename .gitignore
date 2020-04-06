@@ -14,3 +14,7 @@
 
 # Ignore all lock files (if these are used and locked in UFT)
 *.lck 
+
+# Ignore these files until I sort them
+sort-functions.vbs
+browser-functions-old.vbs

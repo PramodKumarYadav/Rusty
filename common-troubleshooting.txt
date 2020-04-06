@@ -1,0 +1,27 @@
+Common Troubleshooting errors and their root cause while working with UFT:
+
+- Forgetting to load all function libraries before testing a action that needs function libraries.
+
+- Changing parameters in functions call or in functions defination but not setting it in other place.
+
+- While calling a object, call using set. While calling a string function, call without Set. 
+	Dim objXML1: Set objXML1 = GetTestEnvConfigurationValue(pathXML, testEnv, Key)
+	Dim BrowserName: BrowserName = GetXMLChildNodeValue(objXML1, Key)
+
+- Mixing this up will result in unexpected errors. For example:
+	- Not setting a "object" using set command. Example.
+		Instead of doing this: Dim envNode: Set envNode = objXML.SelectNodes(xPath)
+		Doing this: Dim envNode: envNode = objXML.SelectNodes(xPath)
+		
+		Another example while returning a function type: Function from test-env-functions (for xml)
+		Correct setting: Set GetTestEnvConfigurationValue = envNode.item(0)
+		Incorrect setting: GetTestEnvConfigurationValue = envNode.item(0)
+		
+	- Setting a non-object using set command. Example (for a function that returns string).
+		Instead of doing this: Dim BrowserName: BrowserName = GetXMLChildNodeValue(objXML1, Key)
+		Doing this: Dim BrowserName: Set BrowserName = GetXMLChildNodeValue(objXML1, Key)
+		
+		Another example while returning a function type: Function from test-env-functions(for xml)
+		Correct setting: GetXMLChildNodeValue = childXMLNode.item(0).nodeTypedValue
+		Incorrect setting: Set GetXMLChildNodeValue = childXMLNode.item(0).nodeTypedValue
+
