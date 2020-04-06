@@ -72,3 +72,10 @@ Function ClickWebButton (objWebButton)
     objWebButton.Click
 	
 End Function
+
+'Click link
+Function ClickLink (objLink)
+	
+    objLink.Click
+	
+End Function
