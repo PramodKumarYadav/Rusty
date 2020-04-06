@@ -15,7 +15,7 @@ Function LoadAllFunctionLibraries(pathFnLibraryDir)
 		'If file is of type vbs, then load this file.
 		If LCase(objFSO.GetExtensionName(objFile.Name)) = "vbs" Then
             'Associate the function library
-			LoadFunctionLibrary objFile.Name 
+			LoadFunctionLibrary objFile.Path 
         End If		
 	Next
 
@@ -36,7 +36,7 @@ Sub ShowSubFolders(objRootFolder)
             'If file is of type vbs, then load this file.
 			If LCase(objFSO.GetExtensionName(objFile.Name)) = "vbs" Then
 				'Associate the function library
-				LoadFunctionLibrary objFile.Name 
+				LoadFunctionLibrary objFile.Path 
 			End If
         Next
 
