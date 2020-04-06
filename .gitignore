@@ -2,7 +2,6 @@
 *.mtr
 *.bdb
 *.html
-*.xml
 *.js
 *.ini
 *.xls
@@ -13,11 +12,5 @@
 *.usp
 *.cfg
 
-# Ignore all lock files
-*.lck
-
-# But not these files...
-!*.mts
-
-# Ignore all solutions (only interested in function libraries to be version controlled)
-/*.ftsln
+# Ignore all lock files (if these are used and locked in UFT)
+*.lck 
