@@ -5,6 +5,44 @@ Option Explicit
 'Usage ex:2 (to fetch limited records): Call GetTestData(pathParentDir, fileName,2) 
 Function GetTestData(pathTestDataDir, fileName, iterations)   
 	
+	Dim connection: Set connection = CreateObject("ADODB.Connection")
+	connection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="&pathTestDataDir&";Extended Properties=""text;HDR=Yes;FMT=Delimited"";"
+	connection.open
+	
+	'Specify how many records to pick from this test data file.
+	Dim sql
+	If iterations = "*" then
+		sql = "SELECT * FROM ["&fileName&"]"
+	Else
+		sql = "SELECT TOP "&iterations&" * FROM ["&fileName&"]"
+	End If
+	
+	Dim recordSet: Set recordSet = CreateObject("ADODB.Recordset")
+	Set recordSet.ActiveConnection = connection
+
+	Const adOpenStatic = 3
+	Const adLockOptimistic = 3
+	Const adUseClient = 3
+	recordSet.CursorLocation = adUseClient
+	recordSet.CursorType = adOpenStatic
+	recordSet.LockType = adLockOptimistic
+
+	' Run the query.
+	recordSet.Source = sql
+	recordSet.Open
+
+	' Disconnect the recordset.
+	Set recordSet.ActiveConnection = Nothing
+
+	'Return the detached recordSet (Recordset will be closed in the calling function.)
+	Set GetTestData = recordSet
+
+	connection.close
+	
+End Function
+
+Function GetTestDataBackUp(pathTestDataDir, fileName, iterations)   
+	
 	Dim ado: Set ado = CreateObject("ADODB.Connection")
 	ado.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="&pathTestDataDir&";Extended Properties=""text;HDR=Yes;FMT=Delimited"";"
 	ado.open
@@ -42,5 +80,4 @@ Function GetTestData(pathTestDataDir, fileName, iterations)
 	ado.close
 	
 End Function
-
 
