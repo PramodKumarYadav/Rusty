@@ -1,17 +1,16 @@
 'To avoid errors due to typos in variable names
-'Option Explicit
+Option Explicit
  
 Function LoadAllFunctionLibraries(pathFnLibraryDir)
 	
 	' Get all the files in the pathFnLibraryDir 
-	Dim objFSO: Set objFSO = CreateObject("Scripting.FileSystemObject")
-	
+	Dim objFSO: Set objFSO = CreateObject("Scripting.FileSystemObject")	
 	Dim objRootFolder: Set objRootFolder = objFSO.GetFolder(pathFnLibraryDir)
 
 	Dim objFiles: Set objFiles = objRootFolder.Files
 	Dim objFile
 	For Each objFile in objFiles
-		'msgbox objFile.Name 
+		msgbox objFile.Name 
 		'If file is of type vbs, then load this file.
 		If LCase(objFSO.GetExtensionName(objFile.Name)) = "vbs" Then
             'Associate the function library
@@ -31,16 +30,17 @@ End Function
 
 Sub ShowSubFolders(objRootFolder)
 	
+	
 	Dim objSubfolder
     For Each objSubfolder in objRootFolder.SubFolders
         
+		Dim objFSO: Set objFSO = CreateObject("Scripting.FileSystemObject")
 		Dim objChildFolder: Set objChildFolder = objFSO.GetFolder(objSubfolder.Path)
         
-		Dim objFiles: Set objFiles = objChildFolder.Files 
-		
+		Dim objFiles: Set objFiles = objChildFolder.Files 		
 		Dim objFile
 		For Each objFile in objFiles
-			'msgbox objFile.Name 
+			msgbox objFile.Name 
             'If file is of type vbs, then load this file.
 			If LCase(objFSO.GetExtensionName(objFile.Name)) = "vbs" Then
 				'Associate the function library
@@ -65,9 +65,9 @@ Function GetParameterValueFromGlobalDataSheet(strParameterName)
 End Function
 
 'Todo: Check if this works (to be tested) and how to give local sheet name in parameter
-Function GetParameterValueFromLocalDataSheet(strParameterName)
+Function GetParameterValueFromLocalDataSheet(strParameterName, sheetName)
 	
 	'Return the value of parameter from local sheet
-	GetParameterValueFromLocalDataSheet = DataTable.Value(strParameterName, dtLocalSheet)
+	GetParameterValueFromLocalDataSheet = DataTable.Value(strParameterName, sheetName)
 	
 End Function
