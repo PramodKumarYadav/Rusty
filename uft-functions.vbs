@@ -10,7 +10,7 @@ Function LoadAllFunctionLibraries(pathFnLibraryDir)
 	Dim objFiles: Set objFiles = objRootFolder.Files
 	Dim objFile
 	For Each objFile in objFiles
-		msgbox objFile.Name 
+		' msgbox objFile.Name 'Use only for debugging
 		'If file is of type vbs, then load this file.
 		If LCase(objFSO.GetExtensionName(objFile.Name)) = "vbs" Then
             'Associate the function library
@@ -20,7 +20,7 @@ Function LoadAllFunctionLibraries(pathFnLibraryDir)
 
 	Call ShowSubfolders(objRootFolder)
 	
-	msgbox "All libraries loaded" 
+	'msgbox "All libraries loaded" 
 	
 	'Now release the objects memory
 	Set objFSO = Nothing
@@ -40,7 +40,7 @@ Sub ShowSubFolders(objRootFolder)
 		Dim objFiles: Set objFiles = objChildFolder.Files 		
 		Dim objFile
 		For Each objFile in objFiles
-			msgbox objFile.Name 
+			' msgbox objFile.Name 'Use only for debugging
             'If file is of type vbs, then load this file.
 			If LCase(objFSO.GetExtensionName(objFile.Name)) = "vbs" Then
 				'Associate the function library
