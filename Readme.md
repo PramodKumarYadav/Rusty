@@ -31,6 +31,111 @@ Now I cannot take away some of the core limitations of UFT, but with Rusty, I ha
     - Web browsers
     - Files
 
+# Design (Bottom Up)
+
+# Data and abstraction layer
+## Objects
+- Each oracle form object type is stored in a file called [oracle-form-objects](./FunctionLibrary/oracle-forms-objects.vbs).
+- Each browser object type is stored in a file called [browser-objects](./FunctionLibrary/browser-objects.vbs).
+- These objects are logical objects which are created on runtime.
+- Once you have created a fn for an object type, you dont need to ever create another one of same type. 
+    - `(Note: In uft, if you use object-repository to store your objects, then you make multiple physical copies of same object. In no time you will have a bluky and slow project with tons of duplications to run).`
+- An example of an oracle form object is as below.
+    ```
+    ' Example Recording: OracleFormWindow("Navigator").OracleTabbedRegion("Functions")
+    Function GetOracleFormWindow(title)
+        
+        'Set object based on the parent object and property title
+        Dim objOracleFormWindow: Set objOracleFormWindow = OracleFormWindow("title:="&title)
+
+        'Check and Continue only if the object exists and is enabled
+        CheckIfObjectExistsAndIsEnabled objOracleFormWindow, title, "OracleFormWindow" 
+        
+        'Assign this object to function
+        Set GetOracleFormWindow = objOracleFormWindow
+        
+        'Now release this object memory
+        Set objOracleFormWindow = Nothing
+        
+    End Function
+    ```
+- An example of a browser object is as below.
+    ```
+    Function GetPageObject(name, title)
+
+        'Set object based on the property browser name and page title
+        Dim objPage: Set objPage = Browser("name:="&name).Page("title:="&title)	
+
+        'Check and Continue only if the object exists and is visible
+        CheckIfObjectExistsAndIsVisible objPage, title, "Page" 
+
+        'Assign this object to function
+        Set GetPageObject = objPage
+
+        'Now release this object memory
+        Set objPage = Nothing
+        
+    End Function
+    ```
+## Actions
+- Each oracle form action is stored in a file called [oracle-forms-actions](./FunctionLibrary/oracle-forms-actions.vbs).
+- Each browser action is stored in a file called [browser-actions](./FunctionLibrary/browser-actions.vbs).
+- We use actions to work on objects (passed as a parameter) to action functions.
+- Apart from doing an action on objects, the idea is to also sepereate the intent from implementation. This keeps code clean and readable.
+- An example of an oracle action is as below.
+    ```
+    ' Example Recording: OracleNotification("Caution").Approve
+    Function ApproveOracleNotification(object)	
+        
+        ' Approve the notification window
+        object.Approve
+        
+    End Function
+    ```
+- An example of a browser action is as below.
+    ```
+    'Navigate to the URL 
+    Function NavigateToURL(objBrowser, URL)
+        
+        objBrowser.navigate(URL)
+        
+    End Function
+    ```
+
+## test-env-config.xml 
+- [test-env-config.xml](./test-env-config-template.xml) is the place where you store your different test environment(s) configuration.
+- any setting which is generic should land here. 
+
+## select-tests-to-run.csv
+- [select-tests-to-run.csv](./select-tests-to-run.csv) is the place where you should specify all the scenarios that you have and want to run in UFT.
+- Mark the ones you want to run as **_Yes_**. Leave the rest. 
+
+## set system environment variables
+- For user to select a test env and to give project root directory (seems vbscript wscript method is unreliable getting this simple thing accurately. So have to rely on powershell.)
+- TODO: Create a powershell script that sets the test env and root project directory as system variable. Script needs to be allsigned so that it runs on all machines. 
+- System environment names:
+    - RUSTY_TEST_ENV
+    - RUSTY_HOME
+
+## Test Data
+- Give test data as csv files in the directory for test data. A [Sample csv test data file](./TestData/InvoiceNrs.csv) is here for your reference.
+- Idea is that you keep data seperate from functions. This way, you will have no duplicate instances and would need to change a data in only one location. 
+
+# Function layer
+## General functions
+- This is where you create general functions for say [browsers](./FunctionLibrary/browser-functions.vbs) and oracle forms.
+- Functions to deal with [test data](./FunctionLibrary/test-data-functions.vbs), [test environement](./FunctionLibrary/test-env-functions.vbs), [files](./FunctionLibrary/file-operations.vbs) and databases come here.
+
+## Domain functions
+- This is the place where you write your domain specific functions. I cannot add a sample here for obvious reasons but they are build exactly similar to say you would build a common browser function as shown above. 
+- You dont have to go to extra length to parameterize your application objects parameters. Your application object parameters will not change in different test environements (dev, test, uat) and there is no point parameterizing them. 
+- Also to support above point, if there is only value for your application object attributes, its not a good candidate for parameterisation.
+- Going by the above logic, parameterise only the input values. Say if you want to fill a few fields to create an invoice, those field inputs should be parameterised, stored in seperate files in test data, and should be passed to functions, during creating a test (a step in top layer)
+
+# Test Layer
+- This is your glue layer. This is the place, where everything is glued together to make tests (still logical),that will run with physical test data, when user (later) selects a test environement and runs them.
+
+
 # [Naming conventions](https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841)
 * Naming directories and files
     * Directory names: PascalCase
@@ -43,3 +148,5 @@ Now I cannot take away some of the core limitations of UFT, but with Rusty, I ha
     * Constants: SNAKE_CASE
     * Database fields: snake_case
     * urls: kebab-case
+# References
+ - [Readme Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables)
