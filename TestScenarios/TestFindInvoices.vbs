@@ -46,7 +46,7 @@ Function TestFindInvoicesToDO()
 	Dim rootDir: rootDir = GetSystemEnvironmentVariable("RUSTY_HOME")
 	Dim fileName: fileName = "FindInvoice.csv"	
 	Dim testDataRecordSet: testDataRecordSet = GetCSVFileAsRecordSet(rootDir & "\TestData", fileName,"*") 
-	Call FindInvoice()
+	Call FindInvoice(testDataRecordSet)
 	
 End Function
 
