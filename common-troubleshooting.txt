@@ -10,7 +10,10 @@ Common Troubleshooting errors and their root cause while working with UFT:
 
 - If you load a library manually via "add fn library from UFT", you would still need to close and open it again in UFT for it to show
   latest contents. Thre is no auto refresh, or auto save for that matter. Not good, but hey, I dont call it Rusty without a reason! 
-  
+- Best option is:
+	- For debugging, add all function libraries manually. 
+	- For running, the script will add them via code.
+	
 - Changing parameters in functions call or in functions defination but not setting it in other place.
 
 - If you rename a function and call it in UFT, it will not tell that the function is missing. Instead, it will say
