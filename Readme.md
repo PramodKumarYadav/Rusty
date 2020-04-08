@@ -31,8 +31,25 @@ Now I cannot take away some of the core limitations of UFT, but with Rusty, I ha
     - Web browsers
     - Files
 
-# Design (Bottom Up)
+# Workflow
 
+## Workflow (Manual trigger of tests)
+
+| main        | Run TestSuite           | Run TestScenario(s) one by one  | TestData | TestResults |
+| ------------- |:-------------:| -----:| -----:| -----:|
+| Trigger Tests |  main calls TestScenarios| each scenario that lays in TestScenario dir is triggered| Test data is used for domain specific tests. This is stored in csv files in TestData dir| In the end results should be stored for each Test Scenario ran in TestSuite (to be done)
+| In UFT (actions)     | from select-tests-to-run.csv      |   This calls functions (both generic, domain specific) | Config files provide env related data | Should provide details at TestSuite, Test Scenario and Test Steps level.
+| test-entrypoint->main | iterate all of them and run if they are selected as Yes      |    For domain specific, we call them with test data functions. general fns are mostly called using test-data-config.xml file | Test Env selection and Root dir location are stroed in System env variables | Results should be stored in a central location (not something to be version controlled though)
+
+## Workflow (automated trigger of tests) - say scheduled via Jenkins
+
+| Trigger        | main        | Run TestSuite           | Run TestScenario(s) one by one  | TestData | TestResults |
+| ------------- | ------------- |:-------------:| -----:| -----:| -----:|
+| Schedule tests in jenkins to run at a given time | Trigger Tests |  main calls TestScenarios| each scenario that lays in TestScenario dir is triggered| Test data is used for domain specific tests. This is stored in csv files in TestData dir| In the end results should be stored for each Test Scenario ran in TestSuite (to be done)
+| This should launch UFT and trigger tests at main | In UFT (actions)     | from select-tests-to-run.csv      |   This calls functions (both generic, domain specific) | Config files provide env related data | Should provide details at TestSuite, Test Scenario and Test Steps level.
+| At completion, results status should be available either via email or in Jenkins | test-entrypoint->main | iterate all of them and run if they are selected as Yes (in scheduled tests, we would ideally want to run all of them)     |    For domain specific, we call them with test data functions. general fns are mostly called using test-data-config.xml file | Test Env selection and Root dir location are stroed in System env variables | Results should be stored in a central location (not something to be version controlled though)
+
+# Design
 # Data and abstraction layer
 ## Objects
 - Each oracle form object type is stored in a file called [oracle-form-objects](./FunctionLibrary/oracle-forms-objects.vbs).
@@ -132,9 +149,22 @@ Now I cannot take away some of the core limitations of UFT, but with Rusty, I ha
 - Also to support above point, if there is only value for your application object attributes, its not a good candidate for parameterisation.
 - Going by the above logic, parameterise only the input values. Say if you want to fill a few fields to create an invoice, those field inputs should be parameterised, stored in seperate files in test data, and should be passed to functions, during creating a test (a step in top layer)
 
-# Test Layer
+# Test Scnearios Layer
 - This is your glue layer. This is the place, where everything is glued together to make tests (still logical),that will run with physical test data, when user (later) selects a test environement and runs them.
+- General functions use config data to set up environment related areas.
+- Domain functions use test data from .csv files from TestData directory to say FindInvoices.
+- This is also the place where you know what can be iterated and what cannot. You control, the iterations from here with two options "*"- All, or a number say "4" to get first four records only. In case if the number is higher, its no problem, sql statement will take care of it.
 
+# Test Suite 
+- This is the place where you specifiy all your test scenario names and if you want to run them (Yes/No)
+- Tests marked Yes will be picked for execution.
+
+# Test Runner (main) 
+- This is the place from where you enter and trigger your tests.
+- When executing tests manually, you have to go to the action, from where this main is called and manually trigger it.
+
+# Test Driver (UFT)
+- When running tests via a scheduler, you will trigger them using another script (to be created), which will trigger the action in UFT for you.
 
 # [Naming conventions](https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841)
 * Naming directories and files
