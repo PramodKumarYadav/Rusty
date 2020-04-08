@@ -47,3 +47,14 @@ Function WriteToFile(sFilename, sLine)
 	f.WriteLine sLine
 	f.Close
 End Function
+
+' New additions from me, to the functions from UFT
+Function GetFileProperties(filePath)
+	Set fso = CreateObject("Scripting.FileSystemObject")
+	Set OpenFile = fso.GetFile(filePath)
+End Function
+
+Function GetParentDirectory(filePath)	
+	Dim file: Set file = GetFileProperties(filePath)
+	GetParentDirectory = file.ParentFolder
+End Function
