@@ -21,4 +21,4 @@ sort-functions.vbs
 browser-functions-old.vbs
 DomainFnLibrary
 TestScenarios
-env.config.xml
+test-env-config.xml
