@@ -1,2 +1,5 @@
 TSName,Select
-TestInvoiceBatches,Yes
+SetUp, Yes
+TestCreateInvoices, No
+TestFindInvoices, Yes
+TearDown, Yes
