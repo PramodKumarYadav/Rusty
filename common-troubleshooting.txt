@@ -2,12 +2,14 @@ Common Troubleshooting errors and their root cause while working with UFT:
 
 - Forgetting to load all function libraries before testing a action that needs function libraries.
 
-- If you load a library via code, it wouldnt reflect in UFT. Close open UFT again. 
+- If you load a library via code, all the changes in libraries that you made after you opened UFT will not be loaded (specially true if you have saved files but not commited them). 
+  To be able to see your changes, close and open UFT again. Rusty- Right!
 
-- Also debug doesnt work when you load libraries via code. As I have been told by a friend, UFT has this bug since version 14 (somewhere early in year 2019).
+- Debug doesnt work when you load libraries via code (even though UFT claims that it should). 
+  As I have been told by a friend, UFT has this bug since version 14 (somewhere early in year 2019). Close to one year gone, still exists!
 
 - If you load a library manually via "add fn library from UFT", you would still need to close and open it again in UFT for it to show
-  latest contents. Thre is no auto refresh, or auto save for that matter. Not good, but hey, its called Rusty for a reason! 
+  latest contents. Thre is no auto refresh, or auto save for that matter. Not good, but hey, I dont call it Rusty without a reason! 
   
 - Changing parameters in functions call or in functions defination but not setting it in other place.
 
