@@ -1,9 +1,9 @@
 'To avoid errors due to typos in variable names
 Option Explicit
 
-'Usage ex:1 (to fetch all records): Call GetTestData(pathParentDir, fileName,"*") 
-'Usage ex:2 (to fetch limited records): Call GetTestData(pathParentDir, fileName,2) 
-Function GetTestData(pathTestDataDir, fileName, iterations)   
+'Usage ex:1 (to fetch all records): Call GetCSVFileAsRecordSet(pathParentDir, fileName,"*") 
+'Usage ex:2 (to fetch limited records): Call GetCSVFileAsRecordSet(pathParentDir, fileName,2) 
+Function GetCSVFileAsRecordSet(pathTestDataDir, fileName, iterations)   
 	
 	Dim connection: Set connection = CreateObject("ADODB.Connection")
 	connection.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="&pathTestDataDir&";Extended Properties=""text;HDR=Yes;FMT=Delimited"";"
@@ -35,13 +35,13 @@ Function GetTestData(pathTestDataDir, fileName, iterations)
 	Set recordSet.ActiveConnection = Nothing
 
 	'Return the detached recordSet (Recordset will be closed in the calling function.)
-	Set GetTestData = recordSet
+	Set GetCSVFileAsRecordSet = recordSet
 
 	connection.close
 	
 End Function
 
-Function GetTestDataBackUp(pathTestDataDir, fileName, iterations)   
+Function GetCSVFileAsRecordSetBackUp(pathTestDataDir, fileName, iterations)   
 	
 	Dim ado: Set ado = CreateObject("ADODB.Connection")
 	ado.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source="&pathTestDataDir&";Extended Properties=""text;HDR=Yes;FMT=Delimited"";"
@@ -60,7 +60,7 @@ Function GetTestDataBackUp(pathTestDataDir, fileName, iterations)
 	'I can now return this recordset object for tests to use it.
 	
 	'Return the recordSet
-	Set GetTestData = recordSet
+	Set GetCSVFileAsRecordSet = recordSet
 	
 	'In the test, we can iterate over whatever iteration was selected, to do the work we want to do (as shown below)
 	'for now kept here for reference, until I start making use of this.
