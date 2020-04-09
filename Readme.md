@@ -8,6 +8,8 @@ Thus I increased the scope of this project, to provide an end to end framework, 
 
 Apart from that, I am sure you will love the end to end design which decouples all test areas (such as Test Data, Test scenarios, Test Suites, functions, objects and actions) and thus allowing high level of scalability with minimum maintenace in case of changes.
 
+P.S: I call it Rusty, since UFT in my experience is outdated and little rusty when it comes to working with new technologies  and way of working. To name a few in the next section!
+
 # A quick compare
 
 A quick compare between Rusty vs Traditional UFT on KPIs and KSFs is  given below. 
@@ -20,33 +22,9 @@ ToDO: To still add actual reference # numbers in "Detailed Notes" column for mor
 | Decoupled design     | Design      |Test fns can use, whatever data format is best suited for job (csvs, db tables, xmls)      |   Functions+Data are tightly coupled and refferred in excel sheets; test scenarios & fns are also tightly coupled in excels |Rusty | # 3 |
 | Project Size | Performance      | in KBs ~500 KBs     |    in MBs ~500 MBs |Rusty |# 4 |
 | Execution Speed | Performance      | Faster by X4     |    Slower by X4 |Rusty |# 5 |
-| Maintenance | Efforts      | low due to de-coupled, no duplication  |  low due to tightly coupled, excel duplication |Rusty |# 6 |
+| Maintenance | Efforts      | low due to de-coupled, no duplication  |  high due to tightly coupled, excel duplication |Rusty |# 6 |
 | Refactoring | Code optimisation      | Possible (code lives in code)    |    Very little (Code lives partly in excels and partly in code) |Rusty |# 7 |
 | Code duplication | Code optimisation      | De-coupled architecture, zero/low code duplication  |    Due to code used from excels, it requires a set template and thus high duplication |Rusty |# 8 |
-
-# The Problem
-I call it Rusty, since UFT in my experience is outdated and little rusty when it comes to working with new technologies  and way of working. To name a few:
-- There isnt a good GIT integration. i.e. not only the integration is very basic, if I commit the code from say VS code for a function library or action, UFT wouldnt see it as committed.
-- UFT still relies heavily on excels for data storage and most of its user interfacing. Excel being an application will go as a binary in GIT. You cannot collabrate with others with a binary file. 
-- UFT uses object repositories for storing objects and properties for saving properties. Both these formats are non readable formats, that cannot be in any sensible way version controlled in git. If multiple people are working on it, you will only see that 'something changed' but you will have no clue 'what changed'. UFT should have come up with substitute artifacts that could be version controlled in GIT and thus make collaboration possible.
-- Still no good ways to assert stuf. Yes there are checkpoints but their abilites are pretty limited. There are tons of libraries out there but its addins support seems pretty limited.
-- VBScript is an old and ancient language. Although easy to learn, its very limited in todays context. 
-- Still no support with parsers for parsing data types (JSON, XML, CSV, YAML). Most programming languages come with parsers to do these jobs.In UFT you have to make these yourselves.
-- No standard functions for database connections. You have to make one yourself with ADODB connection and it seems many are still stuck between 32 bit and 64 bit issues. With 64 bit systems now a norm from many years, its a bit of surprise that we still have these issues.
-- IT is too bulky as a tool for quick automation. It limits performance and execution speed. 
-- If you rename a action, it leaves 'zomby actions' that are just 'hanging there'. 
-
-There are probably more things that I could think of but lets leave it to that.
-
-Nonetheless, there are some applications, which are build in ancient technologies and are still used in companies. No new tools are there around these old technologies and you may be stuck with UFT. If you are, then hopefully rusty can give you a good start with building automation frameworks.
-
-# Rusty's Solution
-Now I cannot take away some of the core limitations of UFT, but with Rusty, I have tried to take away a few of the problems to give you a better integration with GIT and thus a better chance of collaborating with other team members.
-- Instead of storing objecs in object repositores (that you cant manage in GIT), we create a function library that helps identifying differnt types of objects on run time. This gives a clean and consistant way to deal with objects without adding bulky and duplicate objects. This code (or so to say virtual object repository) is git readable.
-- Actions are stored in another function library. This makes the seperation of concerns (intent and implementation) possible. Giving us smaller functions that are git manageable.
-- You can now combine the objects and Actions in every two lines of codes to achieve what you want to achieve. With a consistant way to build your tests, it gives a easy way to write tests (instead of writing them in excel as a keyword based approach -which git cannot work with) to a format, that is similar to the excel one but also git maintainable).See example files to understand what I mean here.
-- Excels, although not used at the time of writing, will be replaced with either XMLs, or CSVs, both these artifacts being git friendly.
-- In general, all artifacts are created keeping a clean design, git maintanability, collaboration and long term maintanece in mind. 
 
 # Scope
     - Oracle Forms
@@ -202,3 +180,29 @@ Now I cannot take away some of the core limitations of UFT, but with Rusty, I ha
     * urls: kebab-case
 # References
  - [Readme Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#tables)
+
+# Appendix
+
+# The Problem
+I call it Rusty, since UFT in my experience is outdated and little rusty when it comes to working with new technologies  and way of working. To name a few:
+- There isnt a good GIT integration. i.e. not only the integration is very basic, if I commit the code from say VS code for a function library or action, UFT wouldnt see it as committed.
+- UFT still relies heavily on excels for data storage and most of its user interfacing. Excel being an application will go as a binary in GIT. You cannot collabrate with others with a binary file. 
+- UFT uses object repositories for storing objects and properties for saving properties. Both these formats are non readable formats, that cannot be in any sensible way version controlled in git. If multiple people are working on it, you will only see that 'something changed' but you will have no clue 'what changed'. UFT should have come up with substitute artifacts that could be version controlled in GIT and thus make collaboration possible.
+- Still no good ways to assert stuf. Yes there are checkpoints but their abilites are pretty limited. There are tons of libraries out there but its addins support seems pretty limited.
+- VBScript is an old and ancient language. Although easy to learn, its very limited in todays context. 
+- Still no support with parsers for parsing data types (JSON, XML, CSV, YAML). Most programming languages come with parsers to do these jobs.In UFT you have to make these yourselves.
+- No standard functions for database connections. You have to make one yourself with ADODB connection and it seems many are still stuck between 32 bit and 64 bit issues. With 64 bit systems now a norm from many years, its a bit of surprise that we still have these issues.
+- IT is too bulky as a tool for quick automation. It limits performance and execution speed. 
+- If you rename a action, it leaves 'zomby actions' that are just 'hanging there'. 
+
+There are probably more things that I could think of but lets leave it to that.
+
+Nonetheless, there are some applications, which are build in ancient technologies and are still used in companies. No new tools are there around these old technologies and you may be stuck with UFT. If you are, then hopefully rusty can give you a good start with building automation frameworks.
+
+# Rusty's Solution
+Now I cannot take away some of the core limitations of UFT, but with Rusty, I have tried to take away a few of the problems to give you a better integration with GIT and thus a better chance of collaborating with other team members.
+- Instead of storing objecs in object repositores (that you cant manage in GIT), we create a function library that helps identifying differnt types of objects on run time. This gives a clean and consistant way to deal with objects without adding bulky and duplicate objects. This code (or so to say virtual object repository) is git readable.
+- Actions are stored in another function library. This makes the seperation of concerns (intent and implementation) possible. Giving us smaller functions that are git manageable.
+- You can now combine the objects and Actions in every two lines of codes to achieve what you want to achieve. With a consistant way to build your tests, it gives a easy way to write tests (instead of writing them in excel as a keyword based approach -which git cannot work with) to a format, that is similar to the excel one but also git maintainable).See example files to understand what I mean here.
+- Excels, although not used at the time of writing, will be replaced with either XMLs, or CSVs, both these artifacts being git friendly.
+- In general, all artifacts are created keeping a clean design, git maintanability, collaboration and long term maintanece in mind. 
