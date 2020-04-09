@@ -1,19 +1,19 @@
  'To avoid errors due to typos in variable names
  Option Explicit
 
- 'Note: The page object changes with every action done on it. 
- 'Remember to always fetch the latest object instance before doing an action on it. (as you see in example in LoginBrowser)
- 
-'All below functions, although still abstract, contains application/domain specific 'fixed' values. You should adjust them as per your application under test
-'for them to work for your AUT.
-
-'For example, in LoginPage function, the 'name' properties (say "usernameField") are specific to 
-'application under test. If you are using it in your application, these values will change 
-'to your applications webedit and webbutton property names.
-
-'However for all practical purposes, for your given environment once you set these values, these
-'values will not change say per different test environments. So you can safely use these as
-'an domain-specific-abstract functions. Remember to change the values if you reuse this library.
+ 'Note: 
+	'1: Browser functions use 'browser-objects' and 'browser-actions' to create steps for creating functions.
+		'In general, you will see a pattern as below:
+		' Get object
+		' Act on it.
+	'2: The page object changes with every action done on it. Thus, remember to always fetch the latest object instance before doing an action on it.
+	'3: All below functions, although still abstract, contains application/domain specific 'fixed' values. Thus:
+		'a) You should adjust them as per your application under test for them to work for your AUT.
+		'b) For example, in LoginPage function, the 'name' properties (say "usernameField") are specific to 'application under test. 
+		'   If you are using it in "your" application, I expect these values to change for your applications webedit and webbutton property names.
+		'c) However once you have changed it, for all practical purposes, for your given environment, these values will not change say per different test environments. 
+		'   So you can safely use these as an domain-specific-abstract functions. 
+		'd) So again: Remember to change the values if you reuse this library.
 
 Function LoginBrowser(strUserName, strPassword)
     
@@ -34,9 +34,6 @@ Function LoginBrowser(strUserName, strPassword)
 	
 End Function
 
-'Note: Same like login, the below values are fixed for AUT. It could be different for your application but once 
-'set, you dont need to parameterise these. Unless your application in different environment has differnt values for these
-'in which case it would make perfect sense to parameterise this. 
 Function LogoutBrowser() 
  
 	' Get Home page object
