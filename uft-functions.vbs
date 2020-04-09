@@ -57,6 +57,7 @@ Sub ShowSubFolders(objRootFolder)
 	
 End Sub
 
+' Just keeping it for your reference. We are not going to use any excels in our framework, so this will not be used. 
 Function GetParameterValueFromGlobalDataSheet(strParameterName)
 	
 	'Return the value of parameter from global sheet
