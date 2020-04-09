@@ -2,13 +2,11 @@
 
 At the time of making this repository, I found no github repositories that can provide a basic framework to test oracle forms. This project started with a goal to fill in that gap for new users.
 
-However, with time I found that UFT as a tool has not been able to catch up with the changing world (specially with Git), which poses a huge problem of collaborating on a framework in a team. Most of the artifacts UFT uses are incompatible for merging/compare/conflict resolving. 
-
-For exampe, UFT heavily relies on excel - (not a data format but an application  that creates binaries with which you cannot do merge/compare/resolve conflicts) or formats that are not workable with git (such as object repositories, properties, environments).
+However, with time I found that UFT as a tool has not been able to catch up with the changing world (specially with Git), which poses a huge problem of collaborating on a framework in a team. Most of the artifacts UFT uses are incompatible for merging/compare/conflict resolving. For exampe, UFT heavily relies on excel - (not a data format but an application  that creates binaries with which you cannot do merge/compare/resolve conflicts) or formats that are not workable with git (such as object repositories, properties, environments).
 
 Thus I increased the scope of this project, to provide an end to end framework, that uses none of these non-compatible artifacts but provides substitutes that can be version controlled in GIT and thus better collaborated in a team. 
 
-Apart from that, I am sure you will love the design which decouples various test areas (such as Test Data, Test scenarios, Test Suites, functions, objects and actions) and thus allowing high level of scalability with minimum maintenace in case of changes.
+Apart from that, I am sure you will love the end to end design which decouples all test areas (such as Test Data, Test scenarios, Test Suites, functions, objects and actions) and thus allowing high level of scalability with minimum maintenace in case of changes.
 
 # A quick compare
 
