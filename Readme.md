@@ -18,13 +18,13 @@ ToDO: To still add actual reference # numbers in "Detailed Notes" column for mor
 | Key Success Factor (KSF)        | Tool/Tech           | Rusty           | Traditional UFT use  | Winner | Detailed Notes | 
 | ------------- |:-------------:|:-------------:| -----:|-----:|-----:|
 | Version Control     | GIT | By using Standard data/file formats | By using binaries (excels) & incompatible data formats (object-repositories,properties etc) |Rusty| # 1 below |
-| Code collaboration    | Working in Teams | Git makes it easy to colloborate | With GIT, its all manual, time consuming and error prone |Rusty| # 2 below |
-| Decoupled design     | Design      |Test fns can use, whatever data format is best suited for job (csvs, db tables, xmls)      |   Functions+Data are tightly coupled and refferrd in excel sheets; test scenarios & fns are also tightly coupled in excels |Rusty | # 3 |
+| Code collaboration    | Working in Teams | Git makes it easy to colloborate | Without GIT, its all manual, time consuming and error prone |Rusty| # 2 below |
+| Decoupled design     | Design      |Test fns can use, whatever data format is best suited for job (csvs, db tables, xmls)      |   Functions+Data are tightly coupled and refferred in excel sheets; test scenarios & fns are also tightly coupled in excels |Rusty | # 3 |
 | Project Size | Performance      | in KBs ~500 KBs     |    in MBs ~500 MBs |Rusty |# 4 |
 | Execution Speed | Performance      | Faster by X4     |    Slower by X4 |Rusty |# 5 |
-| Maintenance | Efforts      | Less by X4  (de-coupled, no duplication)   |    Higher by X4 (coupled,excel duplication) |Rusty |# 6 |
-| Refactoring | Code optimisation      | Possible (code lives in code)    |    Very little (Code lives partly in excels) |Rusty |# 7 |
-| Code duplication | Code optimisation      | De-coupled architecture, zero/low code duplication  |    Due to code used from excels, high level |Rusty |# 8 |
+| Maintenance | Efforts      | low due to de-coupled, no duplication  |  low due to tightly coupled, excel duplication |Rusty |# 6 |
+| Refactoring | Code optimisation      | Possible (code lives in code)    |    Very little (Code lives partly in excels and partly in code) |Rusty |# 7 |
+| Code duplication | Code optimisation      | De-coupled architecture, zero/low code duplication  |    Due to code used from excels, it requires a set template and thus high duplication |Rusty |# 8 |
 
 # The Problem
 I call it Rusty, since UFT in my experience is outdated and little rusty when it comes to working with new technologies  and way of working. To name a few:
