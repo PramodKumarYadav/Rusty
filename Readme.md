@@ -166,6 +166,33 @@ ToDO: To still add actual reference # numbers in "Detailed Notes" column for mor
 # Test Driver (UFT)
 - When running tests via a scheduler, you will trigger them using another script (to be created), which will trigger the action in UFT for you.
 
+# Oracle database connection
+- To make oracle database connection work in UFT, download a 32 bit driver for your oracle database.
+- Go to this page (if your database is 12c - if another database, go to that page), https://www.oracle.com/database/technologies/oracle12c-windows-downloads.html 
+	- Scroll down and look for "Oracle Database 12c Release 2 Client (12.2.0.1.0) for Microsoft Windows (32-bit)" - If you are working on oracle 12C
+	- Download the zip file "win32_12201_client.zip"
+	- Extract the file and run "setup.exe" from the folder : Downloads\win32_12201_client\client32
+	- While selecting "What type of installation do you want", 
+        - select -> Administrator (1.5GB)
+	- Use windows built in account (3rd option)
+	- Keep default locations for 
+		- oracle base -> C:\app\client\yourUserID (no space in between allowed) 
+		- software location -> C:\app\client\yourUserID\product\12.2.0\client_2
+		- Save response file for your future reference
+		- Install the product
+- To test if everything went okay or not, open the ODBC connection for 32 bit
+- Check in the drivers section, if a driver with name "Oracle in OraClient12Home1_32bit" is installed or not.
+- Now you can run the vbscript for testing database connection by running it in 32 bit command line mode. To do this on windows, 
+	- Type %windir%\SysWoW64\cmd.exe in Start Search box.
+	- Change directory to your script location (say cd c:\Users\yourUserID\UFT\Rusty\FunctionLibrary) - If the script is in dir FunctionLibrary
+	- Now you can run the script by writing cscript in front of it -> cscript database-functions.vbs
+	- You should see values popped up from test script.   
+- Connection string format:
+    - https://www.connectionstrings.com/oracle-in-oraclient11g_home1/ (use standard format from here)
+    - Dim connString: connString = "DRIVER={Oracle in OraClient12Home1_32bit};DBQ=yourHostURL:portNr/DBname;Trusted_Connection=Yes;UID=MyUser;Password=myPassword"
+    - Ex (with dummy values): connString = "DRIVER={Oracle in OraClient12Home1_32bit};DBQ=ab12.mycompany.com:1521/ORAB;Trusted_Connection=Yes;UID=pramod;Password=myPassword"
+
+
 # [Naming conventions](https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841)
 * Naming directories and files
     * Directory names: PascalCase
