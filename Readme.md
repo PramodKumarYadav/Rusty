@@ -167,6 +167,7 @@ ToDO: To still add actual reference # numbers in "Detailed Notes" column for mor
 - When running tests via a scheduler, you will trigger them using another script (to be created), which will trigger the action in UFT for you.
 
 # Oracle database connection
+- It took me 5 days to get this correctly working. To save you from this frustration and also since test data is very crucial for setting up any meaningful test framework, this section is dedicated to making this properly set up for you. Hopefully you will not have to face the same frustration that I went through in dealing with this!
 - To make oracle database connection work in UFT, download a 32 bit driver for your oracle database.
 - Go to this page (if your database is 12c - if another database, go to that page), https://www.oracle.com/database/technologies/oracle12c-windows-downloads.html 
 	- Scroll down and look for "Oracle Database 12c Release 2 Client (12.2.0.1.0) for Microsoft Windows (32-bit)" - If you are working on oracle 12C
