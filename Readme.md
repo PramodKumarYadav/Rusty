@@ -187,7 +187,10 @@ ToDO: To still add actual reference # numbers in "Detailed Notes" column for mor
 	- Type %windir%\SysWoW64\cmd.exe in Start Search box.
 	- Change directory to your script location (say cd c:\Users\yourUserID\UFT\Rusty\FunctionLibrary) - If the script is in dir FunctionLibrary
 	- Now you can run the script by writing cscript in front of it -> cscript database-functions.vbs
-	- You should see values popped up from test script.   
+	- It may take some time, even a few mins, but then you should see values from msgbox statements pop up from test script. 
+- If you can add the script and test it from UFT in a debug mode, then you should be able to navigate step by step and see
+expected values from fetched recordset.
+
 - Connection string format:
     - https://www.connectionstrings.com/oracle-in-oraclient11g_home1/ (use standard format from here)
     - Dim connString: connString = "DRIVER={Oracle in OraClient12Home1_32bit};DBQ=yourHostURL:portNr/DBname;Trusted_Connection=Yes;UID=MyUser;Password=myPassword"
