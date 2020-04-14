@@ -38,5 +38,5 @@ Function GetCSVFileAsRecordSet(pathTestDataDir, fileName, iterations)
 	Set GetCSVFileAsRecordSet = recordSet
 
 	connection.close
-	
+	Set connection = Nothing
 End Function
