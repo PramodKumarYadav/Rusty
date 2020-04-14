@@ -45,7 +45,7 @@ Function LogoutBrowser()
 	
 End Function
 
-Function LoginTestEnvironment(objXMLTestEnv)
+Function LoginTestEnvironment(objXMLTestEnv, objXMLUser)
 
 	'Launch browser and navigate to url of your choice
 	Dim strBrowserName: strBrowserName = GetXMLChildNodeValue(objXMLTestEnv, "BrowserName")
@@ -58,8 +58,8 @@ Function LoginTestEnvironment(objXMLTestEnv)
 	Call SyncPage(objPageLogin)
 
 	'Login to the test application
-	Dim strUserName: strUserName = GetXMLChildNodeValue(objXMLTestEnv, "UserName")
-	Dim strPassword: strPassword = GetXMLChildNodeValue(objXMLTestEnv, "EncodedPassword")
+	Dim strUserName: strUserName = GetXMLChildNodeValue(objXMLUser, "UserName")
+	Dim strPassword: strPassword = GetXMLChildNodeValue(objXMLUser, "EncodedPassword")
 	Call LoginBrowser(strUserName, strPassword)
 
 	'SyncPage objPageHome
