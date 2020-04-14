@@ -5,6 +5,9 @@ Option Explicit
 'Set up
 Function SetUp()   
 	
+	'Get user configuration 
+	Dim objXMLUser: Set objXMLUser = GetUserConfigurationObject()
+
 	'Get test environment configuration
 	Dim objXMLTestEnv: Set objXMLTestEnv = GetTestEnvConfigurationObject()
 
@@ -12,7 +15,7 @@ Function SetUp()
 	Call CloseTestBrowsers(objXMLTestEnv)
 
 	'Login to Test environment
-	Call LoginTestEnvironment(objXMLTestEnv)
+	Call LoginTestEnvironment(objXMLTestEnv, objXMLUser)
 
 	'Open Invoice batches
 	Call NavigateToInvoiceBatches()  
