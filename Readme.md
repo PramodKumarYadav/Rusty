@@ -237,3 +237,46 @@ Now I cannot take away some of the core limitations of UFT, but with Rusty, I ha
 - You can now combine the objects and Actions in every two lines of codes to achieve what you want to achieve. With a consistant way to build your tests, it gives a easy way to write tests (instead of writing them in excel as a keyword based approach -which git cannot work with) to a format, that is similar to the excel one but also git maintainable).See example files to understand what I mean here.
 - Excels, although not used at the time of writing, will be replaced with either XMLs, or CSVs, both these artifacts being git friendly.
 - In general, all artifacts are created keeping a clean design, git maintanability, collaboration and long term maintanece in mind. 
+
+# Common Troubleshooting in UFT
+Common Troubleshooting errors and their root cause while working with UFT:
+
+- Forgetting to load all function libraries before testing a action that needs function libraries.
+
+- If you load a library via code, all the changes in libraries that you made after you opened UFT will not be loaded (specially true if you have saved files but not commited them). 
+  To be able to see your changes, close and open UFT again. Rusty- Right!
+
+- Debug doesnt work when you load libraries via code (even though UFT claims that it should). 
+  As I have been told by a friend, UFT has this bug since version 14 (somewhere early in year 2019). Close to one year gone, still exists!
+
+- If you load a library manually via "add fn library from UFT", you would still need to close and open it again in UFT for it to show
+  latest contents. Thre is no auto refresh, or auto save for that matter. Not good, but hey, I dont call it Rusty without a reason! 
+- Best option is:
+	- For debugging, add all function libraries manually. 
+	- For running, the script will add them via code.
+	
+- Changing parameters in functions call or in functions defination but not setting it in other place.
+
+- If you rename a function and call it in UFT, it will not tell that the function is missing. Instead, it will say
+  "Type mismatch: 'GetBrowsersEXENameDummy'". Thats an incorrect message for a missing function. Puts on off in wrong direction and wastes time.Rusty!
+  
+- While calling a object, call using set. While calling a string function, call without Set. 
+	Dim objXML1: Set objXML1 = GetTestEnvConfigurationValue(pathXML, testEnv, Key)
+	Dim BrowserName: BrowserName = GetXMLChildNodeValue(objXML1, Key)
+
+- Mixing this up will result in unexpected errors. For example:
+	- Not setting a "object" using set command. Example.
+		Instead of doing this: Dim envNode: Set envNode = objXML.SelectNodes(xPath)
+		Doing this: Dim envNode: envNode = objXML.SelectNodes(xPath)
+		
+		Another example while returning a function type: Function from test-env-functions (for xml)
+		Correct setting: Set GetTestEnvConfigurationValue = envNode.item(0)
+		Incorrect setting: GetTestEnvConfigurationValue = envNode.item(0)
+		
+	- Setting a non-object using set command. Example (for a function that returns string).
+		Instead of doing this: Dim BrowserName: BrowserName = GetXMLChildNodeValue(objXML1, Key)
+		Doing this: Dim BrowserName: Set BrowserName = GetXMLChildNodeValue(objXML1, Key)
+		
+		Another example while returning a function type: Function from test-env-functions(for xml)
+		Correct setting: GetXMLChildNodeValue = childXMLNode.item(0).nodeTypedValue
+		Incorrect setting: Set GetXMLChildNodeValue = childXMLNode.item(0).nodeTypedValue
