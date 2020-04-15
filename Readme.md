@@ -52,7 +52,23 @@ ToDO: To still add actual reference # numbers in "Detailed Notes" column for mor
 # Design
 
 ## High Level Diagram
-![high-level-design](./Images/high-level-design.vbs)
+![high-level-design](./Images/high-level-design.jpg)
+## Detailed Diagram
+## entry-point-main
+![entry-point-main](./Images/entry-point-main.jpg)
+## select-test-sceanarios-yes-no
+![select-test-sceanarios](./Images/select-test-sceanarios.jpg)
+## actual-tests below
+![actual-tests](./Images/actual-tests.jpg)
+## get-test-configuration
+![get-test-configuration](./Images/get-test-configuration.jpg)
+## get-browser-functions
+![get-browser-functions](./Images/get-browser-functions.jpg)
+## get-forms-and-test-data
+![get-forms-and-test-data](./Images/get-forms-and-test-data.jpg)
+## tear-down
+![tear-down](./Images/tear-down.jpg)
+
 # Data and abstraction layer
 ## Objects
 - Each oracle form object type is stored in a file called [oracle-form-objects](./FunctionLibrary/oracle-forms-objects.vbs).
