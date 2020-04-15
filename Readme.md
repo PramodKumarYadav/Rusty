@@ -50,6 +50,9 @@ ToDO: To still add actual reference # numbers in "Detailed Notes" column for mor
 | At completion, results status should be available either via email or in Jenkins | test-entrypoint->main | iterate all of them and run if they are selected as Yes (in scheduled tests, we would ideally want to run all of them)     |    For domain specific, we call them with test data functions. general fns are mostly called using test-data-config.xml file | Test Env selection and Root dir location are stroed in System env variables | Results should be stored in a central location (not something to be version controlled though)
 
 # Design
+
+## High Level Diagram
+![high-level-design](./Images/high-level-design.vbs)
 # Data and abstraction layer
 ## Objects
 - Each oracle form object type is stored in a file called [oracle-form-objects](./FunctionLibrary/oracle-forms-objects.vbs).
