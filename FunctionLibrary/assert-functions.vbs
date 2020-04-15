@@ -1,4 +1,5 @@
 ' Functions to assert actual vs expected string values
+' Usage: Call AssertActualEQUALToExpected(supplierName, recordSet.Fields(0).Value)
 
 Function AssertActualEQUALToExpected(strActualValue,strExpectedValue)
 	If (Trim(strActualValue) = strExpectedValue) Then
