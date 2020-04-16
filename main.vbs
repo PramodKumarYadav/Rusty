@@ -10,25 +10,40 @@ Function main()
 
 	'Pick tests from "select-tests-to-run.csv" sheet
 	Dim rootDir: rootDir = GetSystemEnvironmentVariable("RUSTY_HOME")	
-	Dim recordSetTS: Set recordSetTS =  GetCSVFileAsRecordSet(rootDir, "select-tests-to-run.csv","*") 
+	Dim rsSuites: Set rsSuites =  GetCSVFileAsRecordSet(rootDir, "select-test-suits-to-run.csv","*") 
 
-	'Pick tests that are selected to be run in "select-tests-to-run.csv" sheet
-	Do Until recordSetTS.EOF		 
-		Dim testScenario: testScenario = recordSetTS.Fields(0).Value
-		Dim selection: selection = recordSetTS.Fields(1).Value
+	'Pick test suits that are selected to be run in "select-test-suits-to-run.csv" sheet
+	Do Until rsSuites.EOF		 	
+		Dim selection: selection = rsSuites.Fields(0).Value
+		Dim testSuite: testSuite = rsSuites.Fields(1).Value	
 
-		' If scenario is selected to run. Then Run it.
-		If selection = "Yes" Then				
-			execute testScenario
+		' If Test suite is selected to run. Then Run the test scenarios in it 
+		If selection = "Yes" Then						
+			Dim rsTestScenarios: Set rsTestScenarios =  GetCSVFileAsRecordSet(rootDir & "\TestSuits", testSuite ,"*") 
+			Do Until rsTestScenarios.EOF		 
+				Dim selectionTS: selectionTS = rsTestScenarios.Fields(0).Value	
+				Dim testScenario: testScenario = rsTestScenarios.Fields(1).Value
+
+				' If scenario is selected to run. Then Run it.
+				If selectionTS = "Yes" Then				
+					execute testScenario
+				End If
+
+				' Once done, go to next record (Test scenario)
+				rsTestScenarios.MoveNext
+			Loop			
+			' At the end close recordset and release the object. 
+			rsTestScenarios.close
+			Set rsTestScenarios = Nothing
 		End If
 
-		' Once done, go to next record (Test scenario)
-		recordSetTS.MoveNext
+		' Once done, go to the next record (Next TestSuite)
+		rsSuites.MoveNext
 	Loop
-	
-	'At the end close recordset and release the object. 
-	recordSetTS.close
-	Set recordSetTS = Nothing
+
+	' At the end close recordset and release the object. 
+	rsSuites.close
+	Set rsSuites = Nothing
 
 End Function
 'Some references:
