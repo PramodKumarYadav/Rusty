@@ -1,0 +1,7 @@
+Select,TSName,Category
+Yes,SetUp,Browser
+Yes,NavigateToInvoiceBatches,Invoices
+No,TestCreateInvoices,Invoices
+Yes,TestFindInvoices,Invoices
+Yes,CloseInvoiceWorkbench,Invoices
+Yes,TearDown,Browser

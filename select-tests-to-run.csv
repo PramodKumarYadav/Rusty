@@ -1,5 +1,0 @@
-TSName,Select
-SetUp, Yes
-TestCreateInvoices, No
-TestFindInvoices, Yes
-TearDown, Yes
