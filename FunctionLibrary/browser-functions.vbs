@@ -78,33 +78,33 @@ Function CloseTestBrowsers(objXMLTestEnv)
 	
 End Function
 
-Function LoginTestEnvironment2(pathConfigXML, testEnv)
+'Set up
+Function SetUp()   
+	
+	'Get test environment configuration
+	Dim objXMLTestEnv: Set objXMLTestEnv = GetTestEnvConfigurationObject()
 
-	'Get the browser type to navigate to from this config.xml file 
-	Dim objXMLTestEnv: Set objXMLTestEnv = GetTestEnvConfigurationObject(pathConfigXML, testEnv)
+	'Close test browsers
+	Call CloseTestBrowsers(objXMLTestEnv)
 
-	'Close all open browser instances of this browser type (say "IE") for test robustness
-	Dim strBrowserName: strBrowserName = GetXMLChildNodeValue(objXMLTestEnv, "BrowserName")
-	Dim browsersEXEFileName: browsersEXEFileName = GetBrowsersEXEName(strBrowserName)
-	Call CloseAllBrowserInstances(browsersEXEFileName)
+	'Get user configuration 
+	Dim objXMLUser: Set objXMLUser = GetUserConfigurationObject()
 
-	'Launch browser and navigate to url of your choice
-	Dim strBrowserURL: strBrowserURL = GetXMLChildNodeValue(objXMLTestEnv, "BrowserURL")
-	Call LaunchBrowserAndGoToURL(strBrowserName, strBrowserURL)
+	'Login to Test environment
+	Call LoginTestEnvironment(objXMLTestEnv, objXMLUser)
+	
+End Function
 
-	'Ensure that page now exists and is fully synced
-	' Get Login page object and sync
-	Dim objPageLogin: Set objPageLogin = GetPageObject("Login", "Login")
-	Call SyncPage(objPageLogin)
+'Tear Down
+Function TearDown()   
+	
+	'Logout from browser
+	Call LogoutBrowser()
+	
+	'Get test environment configuration
+	Dim objXMLTestEnv: Set objXMLTestEnv = GetTestEnvConfigurationObject()
 
-	'Login to the test application
-	Dim strUserName: strUserName = GetXMLChildNodeValue(objXMLTestEnv, "UserName")
-	Dim strPassword: strPassword = GetXMLChildNodeValue(objXMLTestEnv, "EncodedPassword")
-	Call LoginBrowser(strUserName, strPassword)
-
-	'SyncPage objPageHome
-	' Get Home page object and sync
-	Dim objPageHome: Set objPageHome = GetPageObject("Home", "Home")
-	Call SyncPage(objPageHome)
+	'Close test browsers
+	Call CloseTestBrowsers(objXMLTestEnv)
 	
 End Function
