@@ -108,3 +108,27 @@ Function TearDown()
 	Call CloseTestBrowsers(objXMLTestEnv)
 	
 End Function
+
+' NavigateToOracleForms via a general module (System administrator)	
+' Then in tests (not here), switch to the responsibility that you want to test.
+Function NavigateToOracleForms()   
+	
+	' Get Home page object and sync
+	Dim objPageHome: Set objPageHome = GetPageObject("Home", "Home")
+	Call SyncPage(objPageHome)
+
+	'Now Navigate to 'System Administrator'
+	Dim objLinkSystemAdministrator: Set objLinkSystemAdministrator = GetLink2(GetPageObject("Home", "Home"), "System Administrator")
+	Call ClickLink(objLinkSystemAdministrator)
+
+	'Open 'User Monitor' Link
+	Dim objLinkUserMonitor: Set objLinkUserMonitor = GetLink2(GetPageObject("Home", "Home"), "User Monitor")
+	Call ClickLink(objLinkUserMonitor)
+
+	'Wait for Oracle page to sync
+	Dim objPageOracle: Set objPageOracle = GetPageObject("Oracle E-Business Suite R12", "Oracle E-Business Suite R12")
+	Call SyncPage(objPageOracle)
+
+	'msgbox "Web parts done. Now Oracle application part starts..."
+	
+End Function
