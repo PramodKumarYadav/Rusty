@@ -92,6 +92,11 @@ Function SetUp()
 
 	'Login to Test environment
 	Call LoginTestEnvironment(objXMLTestEnv, objXMLUser)
+
+	' Open default oracle forms landing form (i.e. System Administrator -> User Monitor)
+	' User can then navigate within oracle forms depending on the test.
+	' This saves us writing custom browser code for navigation, that can be otherwise easily achieved within forms.
+	Call NavigateToOracleForms()
 	
 End Function
 
@@ -118,11 +123,11 @@ Function NavigateToOracleForms()
 	Call SyncPage(objPageHome)
 
 	'Now Navigate to 'System Administrator'
-	Dim objLinkSystemAdministrator: Set objLinkSystemAdministrator = GetLink2(GetPageObject("Home", "Home"), "System Administrator")
+	Dim objLinkSystemAdministrator: Set objLinkSystemAdministrator = GetLink(GetPageObject("Home", "Home"), "System Administrator")
 	Call ClickLink(objLinkSystemAdministrator)
 
 	'Open 'User Monitor' Link
-	Dim objLinkUserMonitor: Set objLinkUserMonitor = GetLink2(GetPageObject("Home", "Home"), "User Monitor")
+	Dim objLinkUserMonitor: Set objLinkUserMonitor = GetLink(GetPageObject("Home", "Home"), "User Monitor")
 	Call ClickLink(objLinkUserMonitor)
 
 	'Wait for Oracle page to sync
