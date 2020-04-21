@@ -1,3 +1,3 @@
 Select,TestSuite
-Yes,select-tests-to-run-for-ap.csv
-No,select-tests-to-run-for-ar.csv
+No,it-aci-ap-superuser-tests.csv
+Yes,it-aci-ar-superuser-tests.csv

@@ -1,7 +1,0 @@
-Select,TSName,Category
-Yes,SetUp,Browser
-Yes,NavigateToTransactions,Transactions
-No,TestCreateTransactions,Transactions
-Yes,TestFindTransactions,Transactions
-Yes,CloseTransactionsWorkbench,Transactions
-Yes,TearDown,Browser

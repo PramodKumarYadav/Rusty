@@ -1,0 +1,7 @@
+Select,TSName,Category
+Yes,SetUp,Browser
+Yes,SwitchResponsibilityToItalyARSUPERUSER,OracleForms
+Yes,NavigateToTransactions,Transactions
+No,TestFindTransactions,Transactions
+Yes,ExitOracleApplicationFromItalyARSUPERUSER,OracleForms
+Yes,TearDown,Browser

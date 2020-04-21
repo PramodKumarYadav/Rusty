@@ -1,7 +1,7 @@
 Select,TSName,Category
 Yes,SetUp,Browser
+Yes,SwitchResponsibilityToItalyAPSUPERUSER,OracleForms
 Yes,NavigateToInvoiceBatches,Invoices
-No,TestCreateInvoices,Invoices
 Yes,TestFindInvoices,Invoices
-Yes,CloseInvoiceWorkbench,Invoices
+Yes,ExitOracleApplicationFromItalyAPSUPERUSER,OracleForms
 Yes,TearDown,Browser
