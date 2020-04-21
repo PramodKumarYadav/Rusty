@@ -1,0 +1,7 @@
+Select,TSName,Category
+Yes,SetUp,Browser
+Yes,DemoSwitchResponsibilityToItalySUPERUSER,OracleForms
+Yes,DemoNavigateToInvoiceBatches,Transactions
+No,DemoTestFindInvoices,Transactions
+Yes,DemoExitOracleApplicationFromItalySUPERUSER,OracleForms
+Yes,TearDown,Browser
