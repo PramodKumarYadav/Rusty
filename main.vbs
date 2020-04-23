@@ -14,15 +14,15 @@ Function main()
 
 	'Pick test suits that are selected to be run in "select-test-suits-to-run.csv" sheet
 	Do Until rsSuites.EOF		 	
-		Dim selection: selection = rsSuites.Fields(0).Value
-		Dim testSuite: testSuite = rsSuites.Fields(1).Value	
+		Dim selection: selection = rsSuites.Fields("Select").Value
+		Dim testSuite: testSuite = rsSuites.Fields("TestSuite").Value	
 
 		' If Test suite is selected to run. Then Run the test scenarios in it 
 		If selection = "Yes" Then						
 			Dim rsTestScenarios: Set rsTestScenarios =  GetCSVFileAsRecordSet(rootDir & "\TestSuits", testSuite ,"*") 
 			Do Until rsTestScenarios.EOF		 
-				Dim selectionTS: selectionTS = rsTestScenarios.Fields(0).Value	
-				Dim testScenario: testScenario = rsTestScenarios.Fields(1).Value
+				Dim selectionTS: selectionTS = rsTestScenarios.Fields("Select").Value	
+				Dim testScenario: testScenario = rsTestScenarios.Fields("TSName").Value
 
 				' If scenario is selected to run. Then Run it.
 				If selectionTS = "Yes" Then				
