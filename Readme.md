@@ -1,30 +1,30 @@
 # ⚓ : Rusty 
 
+## Reason of existence
 At the time of making this repository, I found no github repositories that can provide a basic framework to test oracle forms. This project started with a goal to fill in that gap for new users.
 
-However, with time I found that UFT as a tool has not been able to catch up with the changing world (specially with Git), which poses a huge problem of collaborating on a framework in a team. Most of the artifacts UFT uses are incompatible for merging/compare/conflict resolving. For exampe, UFT heavily relies on excel - (not a data format but an application  that creates binaries with which you cannot do merge/compare/resolve conflicts) or formats that are not workable with git (such as object repositories, properties, environments).
+## Why Rusty?
+It seems, UFT has not been able to catch up with changing times, specially when it comes to working with new technologies and way of working (specially git). This makes it difficult to collobarate as a team working on UFT. Apart from that, the tool create zombie tests when you delete a test. The debugger doesnt work with load libraries (need a manual load). Script dont still autosave (meaning, you may overwrite good with bad and unintentioal over intentional). Most of the artifacts UFT uses are incompatible for merging/compare/conflict resolving. For exampe, UFT heavily relies on excel - (not a data format but an application  that creates binaries with which you cannot do merge/compare/resolve conflicts) or formats that are not workable with git (such as object repositories, properties, environments). 
 
-Thus I increased the scope of this project, to provide an end to end framework, that uses none of these non-compatible artifacts but provides substitutes that can be version controlled in GIT and thus better collaborated in a team. 
+## Solution
+In this project, we try to make the best use of what UFT has to offer (its object spy abilities and debugging - which by the way also needs improvement) and using alternative test artifcats that are both UFT and GIT compatible. In the process we provide a framework that addresses most of these challenges,
 
-Apart from that, I am sure you will love the end to end design which decouples all test areas (such as Test Data, Test scenarios, Test Suites, functions, objects and actions) and thus allowing high level of scalability with minimum maintenace in case of changes.
-
-P.S: I call it Rusty, since UFT in my experience is outdated and little rusty when it comes to working with new technologies  and way of working. To name a few in the next section!
+Result is an end to end framework, that uses none of these non-compatible artifacts but provides substitutes that can be version controlled in GIT and thus better collaborated in a team. I am sure you will love the end to end design which decouples all test areas (such as Test Data, Test scenarios, Test Suites, functions, objects and actions) and thus allowing high level of scalability with minimum maintenace in case of changes.
 
 # A quick compare
 
 A quick compare between Rusty vs Traditional UFT on KPIs and KSFs is  given below. 
-ToDO: To still add actual reference # numbers in "Detailed Notes" column for more details.
 
-| Key Success Factor (KSF)        | Tool/Tech           | Rusty           | Traditional UFT use  | Winner | Detailed Notes | 
-| ------------- |:-------------:|:-------------:| -----:|-----:|-----:|
-| Version Control     | GIT | By using Standard data/file formats | By using binaries (excels) & incompatible data formats (object-repositories,properties etc) |Rusty| # 1 below |
-| Code collaboration    | Working in Teams | Git makes it easy to colloborate | Without GIT, its all manual, time consuming and error prone |Rusty| # 2 below |
-| Decoupled design     | Design      |Test fns can use, whatever data format is best suited for job (csvs, db tables, xmls)      |   Functions+Data are tightly coupled and refferred in excel sheets; test scenarios & fns are also tightly coupled in excels |Rusty | # 3 |
-| Project Size | Performance      | in KBs ~500 KBs     |    in MBs ~500 MBs |Rusty |# 4 |
-| Execution Speed | Performance      | Faster by X4     |    Slower by X4 |Rusty |# 5 |
-| Maintenance | Efforts      | low due to de-coupled, no duplication  |  high due to tightly coupled, excel duplication |Rusty |# 6 |
-| Refactoring | Code optimisation      | Possible (code lives in code)    |    Very little (Code lives partly in excels and partly in code) |Rusty |# 7 |
-| Code duplication | Code optimisation      | De-coupled architecture, zero/low code duplication  |    Due to code used from excels, it requires a set template and thus high duplication |Rusty |# 8 |
+| Key Success Factor (KSF)        | Tool/Tech           | Rusty           | Traditional UFT use  | Edge | 
+| ------------- |:-------------:|:-------------:| -----:|-----:|
+| Version Control     | GIT | By using Standard data/file formats | By using binaries (excels) & incompatible data formats (object-repositories,properties etc) |Rusty| 
+| Code collaboration    | Working in Teams | Git makes it easy to colloborate | Without GIT, its all manual, time consuming and error prone |Rusty| 
+| Decoupled design     | Design      |Test fns can use, whatever data format is best suited for job (csvs, db tables, xmls)      |   Functions+Data are tightly coupled and refferred in excel sheets; test scenarios & fns are also tightly coupled in excels |Rusty | 
+| Project Size | Performance      | in KBs ~500 KBs     |    in MBs ~500 MBs |Rusty |
+| Execution Speed | Performance      | Faster by X4     |    Slower by X4 |Rusty |
+| Maintenance | Efforts      | low due to de-coupled, no duplication  |  high due to tightly coupled, excel duplication |Rusty |
+| Refactoring | Code optimisation      | Possible (code lives in code)    |    Very little (Code lives partly in excels and partly in code) |Rusty |
+| Code duplication | Code optimisation      | De-coupled architecture, zero/low code duplication  |    Due to code used from excels, it requires a set template and thus high duplication |Rusty |
 
 # Scope
     - Oracle Forms
@@ -53,25 +53,20 @@ ToDO: To still add actual reference # numbers in "Detailed Notes" column for mor
 
 ## High Level Diagram
 ![high-level-design](./Images/high-level-design.jpg)
-## Detailed Diagram
-## entry-point-main
-![entry-point-main](./Images/entry-point-main.jpg)
-## select-test-sceanarios-yes-no
-![select-test-sceanarios](./Images/select-test-sceanarios.jpg)
-## actual-tests below
-![actual-tests](./Images/actual-tests.jpg)
-## get-test-configuration
-![get-test-configuration](./Images/get-test-configuration.jpg)
-## get-browser-functions
-![get-browser-functions](./Images/get-browser-functions.jpg)
-## get-forms-and-test-data
-![get-forms-and-test-data](./Images/get-forms-and-test-data.jpg)
-## tear-down
-![tear-down](./Images/tear-down.jpg)
+## Detailed Diagrams
+### [entry-point-main](./Images/entry-point-main.jpg)
+### [select-test-sceanarios](./Images/select-test-sceanarios.jpg)
+### [actual-tests](./Images/actual-tests.jpg)
+### [get-test-configuration](./Images/get-test-configuration.jpg)
+### [get-browser-functions](./Images/get-browser-functions.jpg)
+### [get-forms-and-test-data](./Images/get-forms-and-test-data.jpg)
+### [tear-down](./Images/tear-down.jpg)
+
 
 # Data and abstraction layer
 ## Objects
 - Each oracle form object type is stored in a file called [oracle-form-objects](./FunctionLibrary/oracle-forms-objects.vbs).
+    - [Oracle has in total 18 type of objects](https://admhelp.microfocus.com/uft/en/14.50-14.53/UFT_Help/Subsystems/FunctionReference/Subsystems/OMRHelp/Content/Oracle/ORACLEPACKAGELib_P.html?TocPath=Object%20Model%20Reference%20for%20GUI%20Testing|Oracle|_____0) (thats all)
 - Each browser object type is stored in a file called [browser-objects](./FunctionLibrary/browser-objects.vbs).
 - These objects are logical objects which are created on runtime.
 - Once you have created a fn for an object type, you dont need to ever create another one of same type. 
@@ -115,6 +110,8 @@ ToDO: To still add actual reference # numbers in "Detailed Notes" column for mor
     ```
 ## Actions
 - Each oracle form action is stored in a file called [oracle-forms-actions](./FunctionLibrary/oracle-forms-actions.vbs).
+    - The number of actions is limited for each object type. You can find all the actions availble for a object [using object Spy from UFT](./Images/oracle-objects-and-methods.png).
+    - For most objects, these actions/methods are limited to somewhere around 20. And most of these actions are common across objects, so expect a small set of actions in total.
 - Each browser action is stored in a file called [browser-actions](./FunctionLibrary/browser-actions.vbs).
 - We use actions to work on objects (passed as a parameter) to action functions.
 - Apart from doing an action on objects, the idea is to also sepereate the intent from implementation. This keeps code clean and readable.
@@ -184,6 +181,11 @@ ToDO: To still add actual reference # numbers in "Detailed Notes" column for mor
 
 # Test Driver (UFT)
 - When running tests via a scheduler, you will trigger them using another script (to be created), which will trigger the action in UFT for you.
+
+# Install powershell 7
+To launch powershell scripts. 
+- We use one to set up the root location of project. 
+- Later we will use powershell functions to create test reports using standard powershell fns. We can create report in any format of our choice, csv, json, html, table.
 
 # Oracle database connection
 - It took me 5 days to get this correctly working. To save you from this frustration and also since test data is very crucial for setting up any meaningful test framework, this section is dedicated to making this properly set up for you. Hopefully you will not have to face the same frustration that I went through in dealing with this!
@@ -259,6 +261,12 @@ Now I cannot take away some of the core limitations of UFT, but with Rusty, I ha
 
 # Common Troubleshooting in UFT
 Common Troubleshooting errors and their root cause while working with UFT:
+
+- If you try to set an object and see that it is coming as false, it could be because there are more than one objects with the same property value. In that case, you may have to create another function, with another parameter that can uniqely help you identfiy that object (example: GetOracleTextFieldUsingDescAndToolTip needed to be created because in a page, there were two text fields with same description)
+
+- If you are debugging, you would need to add library manually (bug in UFT that doesnt load libraries using script). This is a common mistake that happens that we call the function without adding the library.
+
+- Save the function from VSCODE (autosave). Close opened function in UFT and reopen again to see changed values. UFT doesnt autorefresh with changed values. 
 
 - Forgetting to load all function libraries before testing a action that needs function libraries.
 
