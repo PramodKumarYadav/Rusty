@@ -307,3 +307,4 @@ Common Troubleshooting errors and their root cause while working with UFT:
 		Another example while returning a function type: Function from test-env-functions(for xml)
 		Correct setting: GetXMLChildNodeValue = childXMLNode.item(0).nodeTypedValue
 		Incorrect setting: Set GetXMLChildNodeValue = childXMLNode.item(0).nodeTypedValue
+        
