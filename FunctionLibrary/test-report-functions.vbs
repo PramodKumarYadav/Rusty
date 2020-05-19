@@ -91,6 +91,16 @@ Function CreateTestReports()
 
     ' Create test reports in various formats
     Dim rootDir: rootDir = GetSystemEnvironmentVariable("RUSTY_HOME")	
-	RunPowershellScript(rootDir & "PSScripts\create-test-report-formats.ps1")
+	RunPowershellScript(rootDir & "\PSScripts\create-test-report-formats.ps1")
+
+End Function
+
+Function CreateReportAndExitTests()
+    
+    ' Create reports
+    Call CreateTestReports()
+
+    ' Exit tests
+    ExitTest
 
 End Function
