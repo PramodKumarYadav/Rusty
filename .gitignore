@@ -16,9 +16,3 @@
 *.lck 
 
 # Ignore these files until I sort them
-uft-functions-sort.vbs
-sort-functions.vbs
-browser-functions-old.vbs
-DomainFnLibrary
-TestScenarios
-test-env-config.xml
