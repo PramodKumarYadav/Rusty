@@ -2,8 +2,6 @@
 
 ![GitHub contributors](https://img.shields.io/github/contributors/pramodkumaryadav/rusty)
 ![GitHub last commit](https://img.shields.io/github/last-commit/pramodkumaryadav/rusty)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/y/pramodkumaryadav/Rusty)
-![GitHub last commit](https://img.shields.io/github/last-commit/pramodkumaryadav/rusty)
 
 ## Reason of existence
 At the time of making this repository, I found no github repositories that can provide a basic framework to test oracle forms. This project started with a goal to fill in that gap for new users.
