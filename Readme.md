@@ -1,5 +1,10 @@
 # ⚓ : Rusty 
 
+![GitHub contributors](https://img.shields.io/github/contributors/pramodkumaryadav/rusty)
+![GitHub Release Date](https://img.shields.io/github/release-date/pramodkumaryadav/rusty)
+![GitHub last commit](https://img.shields.io/github/last-commit/pramodkumaryadav/rusty)
+![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/pramodkumaryadav/rusty/1.0/master)
+
 ## Reason of existence
 At the time of making this repository, I found no github repositories that can provide a basic framework to test oracle forms. This project started with a goal to fill in that gap for new users.
 
